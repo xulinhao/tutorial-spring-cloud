@@ -1,0 +1,15 @@
+# Standalone Mode
+# See also: http://cloud.spring.io/spring-cloud-static/Edgware.SR2/single/spring-cloud.html#_standalone_mode
+
+server:
+  port: 8761
+
+eureka:
+  instance:
+    hostname: localhost
+    preferIpAddress: true
+  client:
+    registerWithEureka: false
+    fetchRegistry: false
+    serviceUrl:
+      defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/

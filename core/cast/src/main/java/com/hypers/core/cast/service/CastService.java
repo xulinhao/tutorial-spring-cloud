@@ -11,6 +11,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+// TODO
+// 1. h2
+// 2. switch for logging info
+// 3. rename as Delayer
 @Slf4j
 @RestController
 public class CastService {

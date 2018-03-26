@@ -24,8 +24,8 @@ server:
   port: 0
 
 delayer:
-  defaultMinMs: 100
-  defaultMaxMs: 200
+  defaultMinMs: 6000
+  defaultMaxMs: 8000
 
 eureka:
   client:

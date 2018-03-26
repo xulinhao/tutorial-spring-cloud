@@ -21,6 +21,15 @@ services:
   # ------------
   # service
   # ------------
+  movie-composite:
+    image: tutorial-spring-cloud/movie-composite:0.1
+    restart: always
+    ports:
+      - "8080:8080"
+    container_name: movie-composite
+    environment:
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka:8761/eureka
+
   movie:
     image: tutorial-spring-cloud/movie:0.1
     restart: always

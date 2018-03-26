@@ -1,17 +1,22 @@
-package com.hypers.core.review.model;
+package com.hypers.core.rate.model;
 
-import lombok.AllArgsConstructor;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import lombok.Setter;
 import lombok.ToString;
 
-@AllArgsConstructor
+@Entity
+@NoArgsConstructor
 @EqualsAndHashCode
 @ToString
 public class Rate {
 
+  @Id
   @Getter
   @Setter
   @NonNull

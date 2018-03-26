@@ -1,0 +1,5 @@
+INSERT INTO rate (id, movie_id, rate) VALUES (1, 1, 9.6)
+INSERT INTO rate (id, movie_id, rate) VALUES (2, 2, 9.5)
+INSERT INTO rate (id, movie_id, rate) VALUES (3, 3, 9.4)
+INSERT INTO rate (id, movie_id, rate) VALUES (4, 4, 9.4)
+INSERT INTO rate (id, movie_id, rate) VALUES (5, 5, 9.5)

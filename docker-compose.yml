@@ -8,6 +8,15 @@ services:
     restart: always
     ports:
       - "8761:8761"
+    container_name: eureka
+
+  rabbitmq:
+    image: rabbitmq:3-management
+    restart: always
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    container_name: rabbitmq
 
   # ------------
   # service
@@ -15,17 +24,20 @@ services:
   movie:
     image: tutorial-spring-cloud/movie:0.1
     restart: always
+    container_name: movie
     environment:
       EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka:8761/eureka
 
   cast:
     image: tutorial-spring-cloud/cast:0.1
     restart: always
+    container_name: cast
     environment:
       EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka:8761/eureka
 
   rate:
     image: tutorial-spring-cloud/rate:0.1
     restart: always
+    container_name: rate
     environment:
       EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka:8761/eureka

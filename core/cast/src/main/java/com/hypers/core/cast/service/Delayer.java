@@ -7,18 +7,19 @@ import org.springframework.stereotype.Component;
 
 @Slf4j
 @Component
-public class ProcessingTime {
+public class Delayer {
 
-  @Value("${service.defaultMinMs}")
+  @Value("${delayer.defaultMinMs}")
   private int minMs;
 
-  @Value("${service.defaultMaxMs}")
+  @Value("${delayer.defaultMaxMs}")
   private int maxMs;
 
   public void setProcessingTime(int minMs, int maxMs) {
     if (minMs < 0) {
       minMs = 0;
     }
+    
     if (maxMs < minMs) {
       maxMs = minMs;
     }
@@ -31,7 +32,7 @@ public class ProcessingTime {
 
   public int getProcessingTime() {
     int time = minMs + (int) (Math.random() * (maxMs - minMs));
-    log.debug("Return calculated processing time: {} ms", time);
+    log.info("Return calculated processing time: {} ms", time);
 
     return time;
   }

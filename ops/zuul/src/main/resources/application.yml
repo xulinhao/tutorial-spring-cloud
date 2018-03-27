@@ -9,6 +9,7 @@ zuul:
   ignoredServices: '*'
   routes:
     movie: /movie/**
+    movie-composite: /movie-composite/**
 
 eureka:
   client:

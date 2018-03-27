@@ -3,7 +3,7 @@ spring:
     name: movie-composite
 
 server:
-  port: 8084
+  port: 0
 
 eureka:
   client:

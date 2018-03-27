@@ -1,9 +1,14 @@
 spring:
   application:
-    name: movie-composite
+    name: zuul
 
 server:
-  port: 8084
+  port: 8762
+
+zuul:
+  ignoredServices: '*'
+  routes:
+    movie: /movie/**
 
 eureka:
   client:
@@ -12,3 +17,12 @@ eureka:
   instance:
     instanceId: ${spring.application.name}:${vcap.application.instance_id:${spring.application.instance_id:${random.value}}}
     preferIpAddress: true
+
+management:
+  security:
+    enabled: false
+
+security:
+  basic:
+    enabled: false
+

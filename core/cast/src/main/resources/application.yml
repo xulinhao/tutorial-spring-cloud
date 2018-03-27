@@ -21,7 +21,7 @@ spring:
         format_sql: true
 
 server:
-  port: 0
+  port: 8082
 
 delayer:
   defaultMinMs: 6000

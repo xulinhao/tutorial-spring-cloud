@@ -1,5 +1,0 @@
-INSERT INTO movie (id, name, year, director) VALUES (1, 'The Shawshank Redemption', 1994, 'Frank Darabont')
-INSERT INTO movie (id, name, year, director) VALUES (2, 'Forrest Gump', 1994, 'Robert Zemeckis')
-INSERT INTO movie (id, name, year, director) VALUES (3, '霸王别姬', 1993, '陈凯歌')
-INSERT INTO movie (id, name, year, director) VALUES (4, 'Leon', 1994, 'Luc Besson')
-INSERT INTO movie (id, name, year, director) VALUES (5, 'La vita è bella', 1997, 'Roberto Benigni')

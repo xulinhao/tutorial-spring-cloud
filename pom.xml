@@ -26,6 +26,7 @@
     <module>core/movie</module>
     <module>core/rate</module>
     <module>composite/movie-composite</module>
+    <module>composite/movie-api</module>
     <module>ops/eureka</module>
     <module>ops/zuul</module>
   </modules>

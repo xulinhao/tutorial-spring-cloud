@@ -27,6 +27,12 @@ services:
   # ------------
   # service
   # ------------
+  api:
+    image: tutorial-spring-cloud/movie-api:0.1
+    restart: always
+    environment:
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka:8761/eureka
+
   movie-composite:
     image: tutorial-spring-cloud/movie-composite:0.1
     restart: always

@@ -5,7 +5,7 @@ import com.hypers.core.cast.model.Cast;
 import com.hypers.core.movie.model.Movie;
 import com.hypers.core.rate.model.Rate;
 
-import java.util.Date;
+import java.io.IOException;
 import java.util.List;
 
 import lombok.extern.slf4j.Slf4j;
@@ -23,14 +23,9 @@ public class MovieCompositeService {
   @Autowired
   private MovieComposite composite;
 
-  // For testing purpose only
-  @GetMapping("/")
-  public String getMovie() {
-    return "Hello from MovieAPI";
-  }
-
   @GetMapping("/movie/{movieId}")
-  public ResponseEntity<ComposedMovie> getMovie(@PathVariable int movieId) {
+  public ResponseEntity<ComposedMovie> getMovie(@PathVariable int movieId)
+      throws IOException {
 
     // 1.1 If a movie is not returned successfully
     ResponseEntity<Movie> movieResult = composite.getMovie(movieId);

@@ -2,6 +2,7 @@ package com.hypers.composite.movie.service;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+
 import com.hypers.core.movie.model.Movie;
 import com.hypers.core.cast.model.Cast;
 import com.hypers.core.rate.model.Rate;
@@ -19,17 +20,31 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
+/**
+ * XXX
+ *
+ * Two ways to access REST API:
+ * <p/>
+ * - RestTemplate
+ * <p/>
+ * - Feign
+ *
+ * RestTemplate is demonstrated here; while Feign in movie-api module
+ */
 // TODO
-// 1. Feign
+// 1. fallbackUrl
 @Slf4j
 @Component
 public class MovieComposite {
 
   private RestTemplate rt = new RestTemplate();
 
+  // ------------------
+  // Service Functions
+  // ------------------
+
   public ResponseEntity<Movie> getMovie(int movieId) throws IOException {
-    URI uri = this.getServiceUrl("movie",
-        "http://localhost:8081/movie");
+    URI uri = this.getServiceUrl("movie");
 
     String url = uri.toString() + "/movie/" + movieId;
     log.info("Get movie from URL: {}", url);
@@ -38,12 +53,12 @@ public class MovieComposite {
     log.info("Get movie http-status: {}", resultStr.getStatusCode());
     log.info("Get movie body: {}", resultStr.getBody());
 
-    return ResponseEntity.ok(readMovie(resultStr));
+    return ResponseEntity.ok(
+        new ObjectMapper().readValue(resultStr.getBody(), Movie.class));
   }
 
   public ResponseEntity<List<Cast>> getCast(int movieId) throws IOException {
-    URI uri = this.getServiceUrl("cast",
-        "http://localhost:8081/cast");
+    URI uri = this.getServiceUrl("cast");
 
     String url = uri.toString() + "/cast?movieId=" + movieId;
     log.info("Get casts from URL: {}", url);
@@ -52,12 +67,14 @@ public class MovieComposite {
     log.info("Get casts http-status: {}", resultStr.getStatusCode());
     log.info("Get casts body: {}", resultStr.getBody());
 
-    return ResponseEntity.ok(readCast(resultStr));
+    return ResponseEntity.ok(
+        new ObjectMapper().readValue(resultStr.getBody(),
+            new TypeReference<List<Cast>>() {
+            }));
   }
 
   public ResponseEntity<Rate> getRate(int movieId) throws IOException {
-    URI uri = this.getServiceUrl("rate",
-        "http://localhost:8081/rate");
+    URI uri = this.getServiceUrl("rate");
 
     String url = uri.toString() + "/rate?movieId=" + movieId;
     log.info("Get rate from URL: {}", url);
@@ -66,45 +83,23 @@ public class MovieComposite {
     log.info("Get rate http-status: {}", resultStr.getStatusCode());
     log.info("Get rate body: {}", resultStr.getBody());
 
-    return ResponseEntity.ok(readRate(resultStr));
+    return ResponseEntity.ok(
+        new ObjectMapper().readValue(resultStr.getBody(), Rate.class));
   }
 
-  // -------------- //
-  // util functions //
-  // -------------- //
+  // ------------------
+  // Util Function
+  // ------------------
 
   @Autowired
   private LoadBalancerClient loadBalancer;
 
-  private URI getServiceUrl(String serviceId, String fallbackUri) {
-    URI uri = null;
-    try {
-      ServiceInstance instance = loadBalancer.choose(serviceId);
-      uri = instance.getUri();
-      log.info("Resolved serviceId '{}' to URL '{}'.", serviceId, uri);
-
-    } catch (RuntimeException e) {
-      uri = URI.create(fallbackUri);
-      log.warn("Failed to resolve serviceId '{}'. Fallback to URL '{}'.",
-          serviceId, uri);
-    }
+  private URI getServiceUrl(String serviceId) {
+    ServiceInstance instance = loadBalancer.choose(serviceId);
+    URI uri = instance.getUri();
+    log.info("Resolved serviceId '{}' to URL '{}'.", serviceId, uri);
 
     return uri;
-  }
-
-  private Movie readMovie(ResponseEntity<String> response) throws IOException {
-    return new ObjectMapper().readValue(response.getBody(), Movie.class);
-  }
-
-  private List<Cast> readCast(ResponseEntity<String> response) throws
-      IOException {
-    return new ObjectMapper().readValue(response.getBody(),
-        new TypeReference<List<Cast>>() {
-        });
-  }
-
-  private Rate readRate(ResponseEntity<String> response) throws IOException {
-    return new ObjectMapper().readValue(response.getBody(), Rate.class);
   }
 
 }

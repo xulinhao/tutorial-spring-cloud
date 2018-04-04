@@ -21,6 +21,16 @@
     <version>1.5.9.RELEASE</version>
   </parent>
 
+  <modules>
+    <module>core/cast</module>
+    <module>core/movie</module>
+    <module>core/rate</module>
+    <module>composite/movie-composite</module>
+    <module>composite/movie-api</module>
+    <module>ops/eureka</module>
+    <module>ops/zuul</module>
+  </modules>
+
   <dependencyManagement>
     <dependencies>
       <dependency>
@@ -30,6 +40,11 @@
         <type>pom</type>
         <scope>import</scope>
       </dependency>
+        <dependency>
+          <groupId>org.projectlombok</groupId>
+          <artifactId>lombok</artifactId>
+          <version>1.16.16</version>
+        </dependency>
     </dependencies>
   </dependencyManagement>
 

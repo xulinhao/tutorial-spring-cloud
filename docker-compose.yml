@@ -1,0 +1,58 @@
+version: '3'
+services:
+  # ------------
+  # ops
+  # ------------
+  eureka:
+    image: tutorial-spring-cloud/eureka:0.1
+    restart: always
+    ports:
+      - "8761:8761"
+
+  zuul:
+    image: tutorial-spring-cloud/zuul:0.1
+    restart: always
+    ports:
+      - "8762:8762"
+    environment:
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka:8761/eureka
+
+#  rabbitmq:
+#    image: rabbitmq:3-management
+#    restart: always
+#    ports:
+#      - "5672:5672"
+#      - "15672:15672"
+
+  # ------------
+  # service
+  # ------------
+  api:
+    image: tutorial-spring-cloud/movie-api:0.1
+    restart: always
+    environment:
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka:8761/eureka
+
+  movie-composite:
+    image: tutorial-spring-cloud/movie-composite:0.1
+    restart: always
+    environment:
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka:8761/eureka
+
+  movie:
+    image: tutorial-spring-cloud/movie:0.1
+    restart: always
+    environment:
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka:8761/eureka
+
+  cast:
+    image: tutorial-spring-cloud/cast:0.1
+    restart: always
+    environment:
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka:8761/eureka
+
+  rate:
+    image: tutorial-spring-cloud/rate:0.1
+    restart: always
+    environment:
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka:8761/eureka

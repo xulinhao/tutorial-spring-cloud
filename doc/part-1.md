@@ -103,6 +103,5 @@ tutorial-spring-cloud/
 
 ## Next Step
 
-In the [next tutorial section](part-2.md) in the [Tutorial Series](../README
-.md), we will add three core services, study how to register them with 
+In the [next tutorial section](part-2.md) in the [Tutorial Series](../README.md), we will add three core services, study how to register them with 
 Eureka and Zuul, and how to access service by Feign.

@@ -25,7 +25,7 @@ dockerize the Eureka Server application.
 
     ```
     cd tutorial-spring-cloud
-    git checkout v0.1.0 -b B0
+    git checkout v0.1.0 -b B1
     ```
 
 4. Run and open [http://localhost:8761](http://localhost:8761)

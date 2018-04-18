@@ -1,9 +1,9 @@
 spring:
   application:
-    name: ops.gateway
+    name: ops.zuul
 
 server:
-  port: 8762
+  port: 8080
 
 zuul:
   ignoredServices: '*'
@@ -14,7 +14,7 @@ zuul:
 eureka:
   client:
     serviceUrl:
-      defaultZone: ${EUREKA_URI:http://localhost:8761/eureka}
+      defaultZone: http://localhost:8761/eureka
   instance:
     instanceId: ${spring.application.name}:${vcap.application.instance_id:${spring.application.instance_id:${random.value}}}
     preferIpAddress: true

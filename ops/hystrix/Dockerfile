@@ -4,6 +4,6 @@ MAINTAINER XU Linhao <xulinhao1976@qq.com>
 VOLUME /tmp
 
 ARG JAR_FILE
-ADD ${JAR_FILE} /opt/monitor.jar
+ADD ${JAR_FILE} /opt/hystrix.jar
 
-ENTRYPOINT ["/usr/bin/java", "-jar", "/opt/monitor.jar"]
+ENTRYPOINT ["/usr/bin/java", "-jar", "/opt/hystrix.jar"]

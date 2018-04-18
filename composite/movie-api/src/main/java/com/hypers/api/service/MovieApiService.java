@@ -16,9 +16,6 @@ import org.springframework.web.client.RestTemplate;
 @RestController
 public class MovieApiService {
 
-  private static final String MOVIE_COMPOSITE = "service.composite";
-  private static final String QUERY_PATH = "/movie/";
-
   private RestTemplate rt = new RestTemplate();
 
   @Autowired
@@ -27,8 +24,8 @@ public class MovieApiService {
   @GetMapping("/{movieId}")
   public ResponseEntity<String> getCompositedMovie(@PathVariable int movieId) {
 
-    URI uri = loadBalancer.choose(MOVIE_COMPOSITE).getUri();
-    String url = uri.toString() + QUERY_PATH + movieId;
+    URI uri = loadBalancer.choose("service.composite").getUri();
+    String url = uri.toString() + "/movie/" + movieId;
 
     log.info("Get composited movie from URL: {}", url);
 

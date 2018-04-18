@@ -28,9 +28,9 @@
     <module>composite/movie-composite</module>
     <module>composite/movie-api</module>
     <module>ops/eureka</module>
-    <module>ops/zuul</module>
-    <module>ops/monitor</module>
+    <module>ops/hystrix</module>
     <module>ops/turbine</module>
+    <module>ops/zuul</module>
   </modules>
 
   <dependencyManagement>

@@ -1,6 +1,8 @@
 spring:
   application:
     name: ops.turbine
+  rabbitmq:
+      host: ${rabbitmq.host}
 
 server:
   port: 8989
@@ -8,9 +10,16 @@ server:
 eureka:
   client:
     serviceUrl:
-      defaultZone: ${EUREKA_URI:http://localhost:8761/eureka}
+      defaultZone: http://localhost:8761/eureka
   instance:
     instanceId: ${spring.application.name}:${vcap.application.instance_id:${spring.application.instance_id:${random.value}}}
     preferIpAddress: true
     non-secure-port: 8989
+
+#turbine:
+#  aggregator:
+#    clusterConfig: MOVIE
+#  appConfig: api, service.composite
+#  clusterNameExpression: "'default'"
+#  combineHostPort: true
 

@@ -12,22 +12,14 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
-/**
- * XXX
- *
- * Two ways to access REST API:
- * <p/>
- * - RestTemplate
- * <p/>
- * - Feign
- *
- * Feign is demonstrated here; while RestTemplate in movie-composite module
-*/
 // TODO
 // 1. Feign
 @Slf4j
 @RestController
 public class MovieApiService {
+
+  private static final String MOVIE_COMPOSITE = "movie-composite";
+  private static final String QUERY_PATH = "/movie/";
 
   private RestTemplate rt = new RestTemplate();
 
@@ -37,8 +29,8 @@ public class MovieApiService {
   @GetMapping("/{movieId}")
   public ResponseEntity<String> getCompositedMovie(@PathVariable int movieId) {
 
-    URI uri = loadBalancer.choose("movie-composite").getUri();
-    String url = uri.toString() + "/movie/" + movieId;
+    URI uri = loadBalancer.choose(MOVIE_COMPOSITE).getUri();
+    String url = uri.toString() + QUERY_PATH + movieId;
 
     log.info("Get composited movie from URL: {}", url);
 

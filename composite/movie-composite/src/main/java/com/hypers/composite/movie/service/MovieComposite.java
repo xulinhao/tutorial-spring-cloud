@@ -20,19 +20,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
-/**
- * XXX
- *
- * Two ways to access REST API:
- * <p/>
- * - RestTemplate
- * <p/>
- * - Feign
- *
- * RestTemplate is demonstrated here; while Feign in movie-api module
- */
-// TODO
-// 1. fallbackUrl
 @Slf4j
 @Component
 public class MovieComposite {

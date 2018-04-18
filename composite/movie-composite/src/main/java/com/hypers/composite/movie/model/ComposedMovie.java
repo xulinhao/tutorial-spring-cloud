@@ -3,10 +3,8 @@ package com.hypers.composite.movie.model;
 import com.hypers.core.cast.model.Cast;
 import com.hypers.core.movie.model.Movie;
 import com.hypers.core.rate.model.Rate;
-
 import java.util.List;
 import java.util.stream.Collectors;
-
 import lombok.Getter;
 import lombok.ToString;
 

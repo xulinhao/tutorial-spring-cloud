@@ -1,7 +1,6 @@
 package com.hypers.core.cast.service;
 
 import lombok.extern.slf4j.Slf4j;
-
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
@@ -19,7 +18,7 @@ public class Delayer {
     if (minMs < 0) {
       minMs = 0;
     }
-    
+
     if (maxMs < minMs) {
       maxMs = minMs;
     }

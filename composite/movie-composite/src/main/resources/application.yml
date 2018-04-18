@@ -1,6 +1,6 @@
 spring:
   application:
-    name: movie-composite
+    name: service.composite
 
 server:
   port: 0

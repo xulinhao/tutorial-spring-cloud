@@ -1,15 +1,9 @@
 spring:
   application:
-    name: ops.gateway
+    name: ops.monitor
 
 server:
-  port: 8762
-
-zuul:
-  ignoredServices: '*'
-  prefix: /api
-  routes:
-    api: /movie/**
+  port: 7979
 
 eureka:
   client:
@@ -18,12 +12,3 @@ eureka:
   instance:
     instanceId: ${spring.application.name}:${vcap.application.instance_id:${spring.application.instance_id:${random.value}}}
     preferIpAddress: true
-
-management:
-  security:
-    enabled: false
-
-security:
-  basic:
-    enabled: false
-

@@ -1,9 +1,7 @@
 package com.hypers.api.service;
 
 import java.net.URI;
-
 import lombok.extern.slf4j.Slf4j;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.client.loadbalancer.LoadBalancerClient;
 import org.springframework.http.ResponseEntity;
@@ -18,7 +16,7 @@ import org.springframework.web.client.RestTemplate;
 @RestController
 public class MovieApiService {
 
-  private static final String MOVIE_COMPOSITE = "movie-composite";
+  private static final String MOVIE_COMPOSITE = "service.composite";
   private static final String QUERY_PATH = "/movie/";
 
   private RestTemplate rt = new RestTemplate();

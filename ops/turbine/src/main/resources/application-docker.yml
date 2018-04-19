@@ -1,6 +1,8 @@
 spring:
   application:
     name: ops.turbine
+  rabbitmq:
+      host: ${rabbitmq.host}
 
 server:
   port: 8989

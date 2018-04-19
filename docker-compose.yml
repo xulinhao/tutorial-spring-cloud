@@ -34,6 +34,7 @@ services:
       - "8989:8989"
     environment:
       EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka:8761/eureka
+      SPRING_PROFILES_ACTIVE: docker
       RABBITMQ_HOST: rabbitmq
 
 #  zuul:
@@ -60,6 +61,7 @@ services:
       - "8080:8080"
     environment:
       EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka:8761/eureka
+      SPRING_PROFILES_ACTIVE: docker
       RABBITMQ_HOST: rabbitmq
 
   movie:
@@ -68,14 +70,14 @@ services:
     environment:
       EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka:8761/eureka
 
-#  cast:
-#    image: tutorial-spring-cloud/cast:0.1
-#    restart: always
-#    environment:
-#      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka:8761/eureka
-#
-#  rate:
-#    image: tutorial-spring-cloud/rate:0.1
-#    restart: always
-#    environment:
-#      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka:8761/eureka
+  cast:
+    image: tutorial-spring-cloud/cast:0.1
+    restart: always
+    environment:
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka:8761/eureka
+
+  rate:
+    image: tutorial-spring-cloud/rate:0.1
+    restart: always
+    environment:
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka:8761/eureka

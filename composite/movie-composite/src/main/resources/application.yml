@@ -1,11 +1,9 @@
 spring:
   application:
     name: service.composite
-  rabbitmq:
-      host: ${rabbitmq.host}
 
 server:
-  port: 8080
+  port: 0
 
 eureka:
   client:

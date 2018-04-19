@@ -1,0 +1,16 @@
+spring:
+  application:
+    name: ops.turbine
+
+server:
+  port: 8989
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka
+  instance:
+    instanceId: ${spring.application.name}:${vcap.application.instance_id:${spring.application.instance_id:${random.value}}}
+    preferIpAddress: true
+    non-secure-port: 8989
+

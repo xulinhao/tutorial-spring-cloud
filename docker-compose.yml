@@ -1,6 +1,16 @@
 version: '3'
 services:
   # ------------
+  # infra
+  # ------------
+  rabbitmq:
+    image: rabbitmq:3-management
+    restart: always
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+
+  # ------------
   # ops
   # ------------
   eureka:
@@ -9,35 +19,50 @@ services:
     ports:
       - "8761:8761"
 
-  zuul:
-    image: tutorial-spring-cloud/zuul:0.1
+  hystrix:
+    image: tutorial-spring-cloud/hystrix:0.1
     restart: always
     ports:
-      - "8762:8762"
+      - "7979:7979"
     environment:
       EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka:8761/eureka
 
-#  rabbitmq:
-#    image: rabbitmq:3-management
+  turbine:
+    image: tutorial-spring-cloud/turbine:0.1
+    restart: always
+    ports:
+      - "8989:8989"
+    environment:
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka:8761/eureka
+      SPRING_PROFILES_ACTIVE: docker
+      RABBITMQ_HOST: rabbitmq
+
+#  zuul:
+#    image: tutorial-spring-cloud/zuul:0.1
 #    restart: always
 #    ports:
-#      - "5672:5672"
-#      - "15672:15672"
+#      - "8080:8080"
+#    environment:
+#      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka:8761/eureka
 
   # ------------
   # service
   # ------------
-  api:
-    image: tutorial-spring-cloud/movie-api:0.1
-    restart: always
-    environment:
-      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka:8761/eureka
+#  api:
+#    image: tutorial-spring-cloud/movie-api:0.1
+#    restart: always
+#    environment:
+#      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka:8761/eureka
 
-  movie-composite:
+  composite:
     image: tutorial-spring-cloud/movie-composite:0.1
     restart: always
+    ports:
+      - "8080:8080"
     environment:
       EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka:8761/eureka
+      SPRING_PROFILES_ACTIVE: docker
+      RABBITMQ_HOST: rabbitmq
 
   movie:
     image: tutorial-spring-cloud/movie:0.1

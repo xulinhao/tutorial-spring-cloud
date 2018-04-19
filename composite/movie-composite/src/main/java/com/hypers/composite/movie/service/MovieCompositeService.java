@@ -4,12 +4,9 @@ import com.hypers.composite.movie.model.ComposedMovie;
 import com.hypers.core.cast.model.Cast;
 import com.hypers.core.movie.model.Movie;
 import com.hypers.core.rate.model.Rate;
-
 import java.io.IOException;
 import java.util.List;
-
 import lombok.extern.slf4j.Slf4j;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;

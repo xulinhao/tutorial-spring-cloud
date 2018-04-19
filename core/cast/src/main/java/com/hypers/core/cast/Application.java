@@ -2,7 +2,6 @@ package com.hypers.core.cast;
 
 import com.hypers.core.cast.model.Cast;
 import com.hypers.core.cast.model.CastRepository;
-
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

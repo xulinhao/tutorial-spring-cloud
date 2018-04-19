@@ -2,7 +2,6 @@ package com.hypers.core.rate;
 
 import com.hypers.core.rate.model.Rate;
 import com.hypers.core.rate.model.RateRepository;
-
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

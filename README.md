@@ -24,8 +24,8 @@ Enjoy your study!
 
 ## [Part 3: Trying out Circuit Breaker, Hytrix and Turbine](doc/part-3.md)
 
-## [Part 4: Adding a Config Server](doc/part-4.md)
+## [Part 4: Tracing with Zipkin and Sleuth](doc/part-4.md)
 
-## [Part 5: Tracing with Zipkin and Sleuth](doc/part-5.md)
+## [Part 5: Adding a Config Server](doc/part-5.md)
 
 ## [Part 6: Logging with ELK](doc/part-6.md)

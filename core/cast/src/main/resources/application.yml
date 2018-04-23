@@ -1,6 +1,11 @@
 spring:
   application:
     name: service.cast
+  zipkin:
+    baseUrl: http://localhost:9411
+  sleuth:
+    sampler:
+      percentage: 1.0
 
   # database
   datasource:

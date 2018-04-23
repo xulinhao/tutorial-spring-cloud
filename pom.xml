@@ -30,6 +30,7 @@
     <module>ops/eureka</module>
     <module>ops/hystrix</module>
     <module>ops/turbine</module>
+    <module>ops/zipkin</module>
     <module>ops/zuul</module>
   </modules>
 

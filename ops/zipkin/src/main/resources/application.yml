@@ -1,20 +1,9 @@
 spring:
   application:
-    name: ops.zuul
-  zipkin:
-    baseUrl: http://localhost:9411
-  sleuth:
-    sampler:
-      percentage: 1.0
+    name: ops.zipkin
 
 server:
-  port: 8080
-
-zuul:
-  ignoredServices: '*'
-  prefix: /api
-  routes:
-    api: /movie/**
+  port: 9411
 
 eureka:
   client:
@@ -23,12 +12,4 @@ eureka:
   instance:
     instanceId: ${spring.application.name}:${vcap.application.instance_id:${spring.application.instance_id:${random.value}}}
     preferIpAddress: true
-
-management:
-  security:
-    enabled: false
-
-security:
-  basic:
-    enabled: false
 

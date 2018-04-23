@@ -13,6 +13,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.cloud.client.loadbalancer.LoadBalancerClient;
+import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
@@ -22,7 +23,13 @@ import org.springframework.web.client.RestTemplate;
 @Component
 public class MovieComposite {
 
-  private RestTemplate rt = new RestTemplate();
+  @Autowired
+  private RestTemplate rt;
+
+  @Bean
+  public RestTemplate getRestTemplate() {
+    return new RestTemplate();
+  }
 
   // ------------------
   // Service Functions
@@ -52,7 +59,7 @@ public class MovieComposite {
   public ResponseEntity<List<Cast>> getCast(int movieId) throws IOException {
     URI uri = this.getServiceUrl("service.cast");
 
-    String url = uri.toString() + "/cast?movieId=" + movieId;
+    String url = uri.toString() + "/cast/" + movieId;
     log.info("Get casts from URL: {}", url);
 
     ResponseEntity<String> resultStr = rt.getForEntity(url, String.class);
@@ -74,7 +81,7 @@ public class MovieComposite {
   public ResponseEntity<Rate> getRate(int movieId) throws IOException {
     URI uri = this.getServiceUrl("service.rate");
 
-    String url = uri.toString() + "/rate?movieId=" + movieId;
+    String url = uri.toString() + "/rate/" + movieId;
     log.info("Get rate from URL: {}", url);
 
     ResponseEntity<String> resultStr = rt.getForEntity(url, String.class);

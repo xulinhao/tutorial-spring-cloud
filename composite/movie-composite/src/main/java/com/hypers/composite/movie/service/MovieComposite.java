@@ -13,6 +13,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.cloud.client.loadbalancer.LoadBalancerClient;
+import org.springframework.cloud.sleuth.annotation.NewSpan;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -35,6 +36,7 @@ public class MovieComposite {
   // Service Functions
   // ------------------
 
+  @NewSpan
   @HystrixCommand(fallbackMethod = "defaultMovie")
   public ResponseEntity<Movie> getMovie(int movieId) throws IOException {
     URI uri = this.getServiceUrl("service.movie");
@@ -50,11 +52,13 @@ public class MovieComposite {
         new ObjectMapper().readValue(resultStr.getBody(), Movie.class));
   }
 
+  @NewSpan
   public ResponseEntity<Movie> defaultMovie(int movieId) {
     log.warn("Fallback getMovie");
     return ResponseEntity.status(HttpStatus.BAD_GATEWAY).body(null);
   }
 
+  @NewSpan
   @HystrixCommand(fallbackMethod = "defaultCast")
   public ResponseEntity<List<Cast>> getCast(int movieId) throws IOException {
     URI uri = this.getServiceUrl("service.cast");
@@ -72,11 +76,13 @@ public class MovieComposite {
             }));
   }
 
+  @NewSpan
   public ResponseEntity<List<Cast>> defaultCast(int movieId) {
     log.warn("Fallback getCast");
     return ResponseEntity.status(HttpStatus.BAD_GATEWAY).body(null);
   }
 
+  @NewSpan
   @HystrixCommand(fallbackMethod = "defaultRate")
   public ResponseEntity<Rate> getRate(int movieId) throws IOException {
     URI uri = this.getServiceUrl("service.rate");
@@ -92,6 +98,7 @@ public class MovieComposite {
         new ObjectMapper().readValue(resultStr.getBody(), Rate.class));
   }
 
+  @NewSpan
   public ResponseEntity<Rate> defaultRate(int movieId) {
     log.warn("Fallback getRate");
     return ResponseEntity.status(HttpStatus.BAD_GATEWAY).body(null);

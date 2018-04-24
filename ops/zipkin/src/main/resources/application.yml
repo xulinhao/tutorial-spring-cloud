@@ -1,11 +1,9 @@
 spring:
   application:
-    name: ops.turbine
-  rabbitmq:
-      host: ${rabbitmq.host}
+    name: ops.zipkin
 
 server:
-  port: 8989
+  port: 9411
 
 eureka:
   client:
@@ -14,5 +12,4 @@ eureka:
   instance:
     instanceId: ${spring.application.name}:${vcap.application.instance_id:${spring.application.instance_id:${random.value}}}
     preferIpAddress: true
-    non-secure-port: 8989
 

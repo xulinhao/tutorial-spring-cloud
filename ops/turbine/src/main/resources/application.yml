@@ -14,3 +14,8 @@ eureka:
     preferIpAddress: true
     non-secure-port: 8989
 
+turbine:
+  appConfig: service.composite
+  aggregator:
+    clusterConfig: default
+  clusterNameExpression: new String("default")

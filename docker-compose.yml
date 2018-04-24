@@ -1,14 +1,14 @@
 version: '3'
 services:
   # ------------
-  # infra
+  # uncomment this when using Hystrix Stream by RabbitMQ
   # ------------
-  rabbitmq:
-    image: rabbitmq:3-management
-    restart: always
-    ports:
-      - "5672:5672"
-      - "15672:15672"
+#  rabbitmq:
+#    image: rabbitmq:3-management
+#    restart: always
+#    ports:
+#      - "5672:5672"
+#      - "15672:15672"
 
   # ------------
   # ops
@@ -34,8 +34,14 @@ services:
       - "8989:8989"
     environment:
       EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka:8761/eureka
-      SPRING_PROFILES_ACTIVE: docker
-      RABBITMQ_HOST: rabbitmq
+
+  zipkin:
+    image: tutorial-spring-cloud/zipkin:0.1
+    restart: always
+    ports:
+      - "9411:9411"
+    environment:
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka:8761/eureka
 
 #  zuul:
 #    image: tutorial-spring-cloud/zuul:0.1
@@ -61,23 +67,25 @@ services:
       - "8080:8080"
     environment:
       EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka:8761/eureka
-      SPRING_PROFILES_ACTIVE: docker
-      RABBITMQ_HOST: rabbitmq
+      SPRING_ZIPKIN_BASEURL: http://zipkin:9411
 
   movie:
     image: tutorial-spring-cloud/movie:0.1
     restart: always
     environment:
       EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka:8761/eureka
+      SPRING_ZIPKIN_BASEURL: http://zipkin:9411
 
   cast:
     image: tutorial-spring-cloud/cast:0.1
     restart: always
     environment:
       EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka:8761/eureka
+      SPRING_ZIPKIN_BASEURL: http://zipkin:9411
 
   rate:
     image: tutorial-spring-cloud/rate:0.1
     restart: always
     environment:
       EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka:8761/eureka
+      SPRING_ZIPKIN_BASEURL: http://zipkin:9411

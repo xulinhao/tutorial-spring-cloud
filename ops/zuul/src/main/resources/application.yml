@@ -1,6 +1,11 @@
 spring:
   application:
     name: ops.zuul
+  zipkin:
+    baseUrl: http://localhost:9411
+  sleuth:
+    sampler:
+      percentage: 1.0
 
 server:
   port: 8080
